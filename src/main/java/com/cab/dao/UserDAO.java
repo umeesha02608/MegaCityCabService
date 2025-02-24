@@ -3,6 +3,8 @@ package com.cab.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.cab.db.DBConnection;
 import com.cab.model.User;
@@ -25,7 +27,7 @@ public class UserDAO {
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));
 
-               
+                
                 if (!isUserInUserTable(rs.getString("username"))) {
                     insertIntoUserTable(rs.getString("username"), password, rs.getString("role"));
                 }
@@ -37,7 +39,7 @@ public class UserDAO {
         return user;
     }
 
-   
+    
     private boolean isUserInUserTable(String username) {
         boolean exists = false;
         try {
@@ -69,4 +71,5 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+    
 }
