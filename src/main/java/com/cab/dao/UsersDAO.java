@@ -56,4 +56,63 @@ public class UsersDAO {
         return usersList;
     }
     
+    public Users getUserById(int id) {
+        Users user = null;
+        try (Connection conn = DBConnection.getConnection()) {
+            String query = "SELECT * FROM users WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new Users(
+                    rs.getString("registration_id"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("nic"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("role")
+                );
+                user.setId(rs.getInt("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public boolean updateUser(Users user) {
+        boolean updated = false;
+        try (Connection conn = DBConnection.getConnection()) {
+            String query = "UPDATE users SET name=?, address=?, nic=?, username=?, role=? WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getAddress());
+            ps.setString(3, user.getNic());
+            ps.setString(4, user.getUsername());
+            ps.setString(5, user.getRole());
+            ps.setInt(6, user.getId());
+
+            updated = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return updated;
+    }
+
+    
+    public boolean deleteUser(int id) {
+        boolean deleted = false;
+        try (Connection conn = DBConnection.getConnection()) {
+            String query = "DELETE FROM users WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            deleted = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return deleted;
+    }
+
+    
 }
