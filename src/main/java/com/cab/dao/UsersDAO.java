@@ -10,6 +10,7 @@ import com.cab.db.DBConnection;
 import com.cab.model.Users;
 
 public class UsersDAO {
+    // Register a new user
     public static boolean registerUser(Users user) {
         boolean status = false;
         try (Connection conn = DBConnection.getConnection()) {
@@ -30,6 +31,7 @@ public class UsersDAO {
         return status;
     }
     
+    // Get all users
     public List<Users> getAllUsers() {
         List<Users> usersList = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection()) {
@@ -56,63 +58,46 @@ public class UsersDAO {
         return usersList;
     }
     
-    public Users getUserById(int id) {
-        Users user = null;
-        try (Connection conn = DBConnection.getConnection()) {
-            String query = "SELECT * FROM users WHERE id=?";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                user = new Users(
-                    rs.getString("registration_id"),
-                    rs.getString("name"),
-                    rs.getString("address"),
-                    rs.getString("nic"),
-                    rs.getString("username"),
-                    rs.getString("password"),
-                    rs.getString("role")
-                );
-                user.setId(rs.getInt("id"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
+    // Update user details
     public boolean updateUser(Users user) {
-        boolean updated = false;
+        boolean status = false;
         try (Connection conn = DBConnection.getConnection()) {
-            String query = "UPDATE users SET name=?, address=?, nic=?, username=?, role=? WHERE id=?";
+            String query = "UPDATE users SET registration_id=?, name=?, address=?, nic=?, username=?, password=?, role=? WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getAddress());
-            ps.setString(3, user.getNic());
-            ps.setString(4, user.getUsername());
-            ps.setString(5, user.getRole());
-            ps.setInt(6, user.getId());
+            ps.setString(1, user.getRegistrationId());
+            ps.setString(2, user.getName());
+            ps.setString(3, user.getAddress());
+            ps.setString(4, user.getNic());
+            ps.setString(5, user.getUsername());
+            ps.setString(6, user.getPassword());
+            ps.setString(7, user.getRole());
+            ps.setInt(8, user.getId());
 
-            updated = ps.executeUpdate() > 0;
+            status = ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return updated;
+        return status;
     }
-
     
-    public boolean deleteUser(int id) {
-        boolean deleted = false;
+    // Delete user
+    public boolean deleteUser(int userId) {
+        boolean status = false;
         try (Connection conn = DBConnection.getConnection()) {
             String query = "DELETE FROM users WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id);
-            deleted = ps.executeUpdate() > 0;
+            ps.setInt(1, userId);
+
+            status = ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return deleted;
+        return status;
+    }
+    
+    // Admin adds a new user
+    public boolean addUserByAdmin(Users user) {
+        return registerUser(user); 
     }
 
-    
 }

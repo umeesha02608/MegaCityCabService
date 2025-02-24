@@ -9,9 +9,11 @@
     <div class="container mt-4">
         <h2>Admin Dashboard</h2>
         <div class="list-group">
+            <a href="add_user.jsp" class="list-group-item list-group-item-action">Add a User</a>
             <a href="manage_users.jsp" class="list-group-item list-group-item-action">Manage Users</a>
             <a href="manage_bookings.jsp" class="list-group-item list-group-item-action">Manage Customer Bookings</a>
             <a href="calculate_bills.jsp" class="list-group-item list-group-item-action">Calculate and Print Bills</a>
+            <a href="add_cars.jsp" class="list-group-item list-group-item-action">Add Cars</a>
             <a href="manage_cars.jsp" class="list-group-item list-group-item-action">Manage Cars</a>
             <a href="help.jsp" class="list-group-item list-group-item-action">Help</a>
             <a href="logout.jsp" class="list-group-item list-group-item-action text-danger">Logout</a>
