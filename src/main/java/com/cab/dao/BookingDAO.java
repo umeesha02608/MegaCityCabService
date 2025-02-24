@@ -21,7 +21,7 @@ public class BookingDAO {
             ps.setString(2, booking.getCustomerName());
             ps.setString(3, booking.getAddress());
             ps.setString(4, booking.getTelephone());
-            ps.setString(5, booking.getDestination());
+            ps.setString(5, booking.getDestination());   
             ps.setString(6, booking.getBookingDate());
             ps.setString(7, booking.getBookingTime());
 

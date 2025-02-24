@@ -17,7 +17,7 @@ public class Booking {
         this.destination = destination;
         this.bookingDate = bookingDate;
         this.bookingTime = bookingTime;
-    }
+    }   
 
     public String getOrderNumber() { return orderNumber; }
     public String getCustomerName() { return customerName; }

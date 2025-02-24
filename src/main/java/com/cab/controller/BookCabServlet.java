@@ -25,7 +25,7 @@ public class BookCabServlet extends HttpServlet {
         String telephone = request.getParameter("telephone");
         String destination = request.getParameter("destination");
 
-        // Get current date and time
+        
         String bookingDate = LocalDate.now().toString();
         String bookingTime = LocalTime.now().toString();
 
