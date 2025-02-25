@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cab.db.DBConnection;
+import com.cab.model.User;
 import com.cab.model.Users;
 
 public class UsersDAO {
@@ -98,6 +99,42 @@ public class UsersDAO {
     // Admin adds a new user
     public boolean addUserByAdmin(Users user) {
         return registerUser(user); 
+    }
+    
+    public List<Users> getAllDrivers() {
+        List<Users> drivers = new ArrayList<>();
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT id, name FROM users WHERE role = 'driver'"; // Fetch name and ID
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Users driver = new Users();
+                driver.setId(rs.getInt("id"));
+                driver.setName(rs.getString("name"));  // Fetch the driver's name
+                drivers.add(driver);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return drivers;
+    }
+    
+    public String getDriverNameById(int driverId) {
+        String driverName = null;
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT name FROM users WHERE id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, driverId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                driverName = rs.getString("name"); // Fetching driver name
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return driverName;
     }
 
 }
