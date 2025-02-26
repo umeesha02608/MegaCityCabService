@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
                 
                 response.sendRedirect("login.jsp?error=Invalid Credentials!");
             }
+            
         }
     }
 }

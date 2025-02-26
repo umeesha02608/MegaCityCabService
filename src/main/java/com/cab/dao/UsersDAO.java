@@ -15,7 +15,7 @@ public class UsersDAO {
     public static boolean registerUser(Users user) {
         boolean status = false;
         try (Connection conn = DBConnection.getConnection()) {
-            String query = "INSERT INTO users (registration_id, name, address, nic, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users (registration_id, name, address, nic, username, password, role) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, user.getRegistrationId());
             ps.setString(2, user.getName());
@@ -137,4 +137,29 @@ public class UsersDAO {
         return driverName;
     }
 
+    
+    public Users getUserById(int id) {
+        Users user = null;
+        try (Connection conn = DBConnection.getConnection()) {
+            String query = "SELECT * FROM users WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new Users(
+                    rs.getString("registration_id"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("nic"),
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("role")
+                );
+                user.setId(rs.getInt("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
