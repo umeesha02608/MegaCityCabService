@@ -83,4 +83,29 @@ public class CarDAO {
         }
         return status;
     }
+    
+    public Car getCarById(int id) {
+        Car car = null;
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT * FROM cars WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                car = new Car();
+                car.setId(rs.getInt("id"));
+                car.setModel(rs.getString("model"));
+                car.setBrand(rs.getString("brand"));
+                car.setPlateNumber(rs.getString("plate_number"));
+                car.setStatus(rs.getString("status"));
+                car.setDriverId(rs.getInt("driver_id"));
+                car.setDriverName(rs.getString("driver_name"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return car;
+    }
+
 }

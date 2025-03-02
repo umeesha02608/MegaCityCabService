@@ -31,13 +31,45 @@ public class CarServlet extends HttpServlet {
 
             // Fetch driver name from UsersDAO
             UsersDAO usersDAO = new UsersDAO();
-            String driverName = usersDAO.getDriverNameById(driverId); // Fetch the driver name
+            String driverName = usersDAO.getDriverNameById(driverId);
 
             Car car = new Car(model, brand, plateNumber, "Available", driverId, driverName);
-            CarDAO carDAO = new CarDAO();
-            carDAO.addCar(car); // Ensure the driver name is stored
+            carDAO.addCar(car);
 
             response.sendRedirect("manage_cars.jsp");
+        } else if ("edit".equals(action)) {  // Handle car update
+            int id = Integer.parseInt(request.getParameter("id"));
+            String model = request.getParameter("model");
+            String brand = request.getParameter("brand");
+            String plateNumber = request.getParameter("plateNumber");
+            String status = request.getParameter("status");
+            int driverId = Integer.parseInt(request.getParameter("driverId"));
+            String driverName = request.getParameter("driverName");
+
+            Car car = new Car(model, brand, plateNumber, status, driverId, driverName);
+            car.setId(id);
+
+            if (carDAO.updateCar(car)) {
+                response.sendRedirect("manage_cars.jsp");
+            } else {
+                response.getWriter().write("Error updating car.");
+            }
         }
     }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("delete".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+
+            if (carDAO.deleteCar(id)) {
+                response.sendRedirect("manage_cars.jsp");
+            } else {
+                response.getWriter().write("Error deleting car.");
+            }
+        }
+    }
+
 }
