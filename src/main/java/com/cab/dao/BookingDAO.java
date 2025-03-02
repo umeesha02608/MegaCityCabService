@@ -74,13 +74,13 @@ public class BookingDAO {
         return bookings;
     }
     
+ // Fetch bookings assigned to a specific driver
     public List<Booking> getBookingsByDriver(String driverName) {
         List<Booking> bookings = new ArrayList<>();
         String sql = "SELECT * FROM booking WHERE driver_name = ?";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
-            
             ps.setString(1, driverName);
             ResultSet rs = ps.executeQuery();
 
@@ -98,7 +98,7 @@ public class BookingDAO {
                     rs.getDouble("fare"),
                     rs.getString("booking_date"),
                     rs.getString("booking_time"),
-                    rs.getString("status") 
+                    rs.getString("status")
                 );
                 bookings.add(booking);
             }
@@ -108,4 +108,20 @@ public class BookingDAO {
         return bookings;
     }
 
+    // Update booking status (for Accept functionality)
+    public boolean updateBookingStatus(String orderNumber, String status) {
+        boolean success = false;
+        String sql = "UPDATE booking SET status = ? WHERE order_number = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setString(2, orderNumber);
+
+            success = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
 }

@@ -1,53 +1,61 @@
 <%@ page import="java.util.List" %>
+<%@ page import="com.cab.dao.BookingDAO" %>
 <%@ page import="com.cab.model.Booking" %>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<jsp:useBean id="bookingDAO" class="com.cab.dao.BookingDAO" />
 
+<%
+    // Get logged-in driver name
+    HttpSession sess = request.getSession(false);
+    String driverName = (sess != null) ? (String) sess.getAttribute("user") : null;
+
+    if (driverName == null) {
+        response.sendRedirect("login.jsp");
+        return;
+    }
+
+    // Fetch bookings assigned to this driver
+    List<Booking> bookings = bookingDAO.getBookingsByDriver(driverName);
+%>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Driver Assigned Bookings</title>
-    <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
+    <title>Driver Bookings</title>
 </head>
 <body>
-    <h2>My Assigned Bookings</h2>
-    <table>
+    <h2>Assigned Bookings</h2>
+    <table border="1">
         <tr>
             <th>Order Number</th>
-            <th>Customer Name</th>
             <th>Pickup Location</th>
             <th>Drop Location</th>
+            <th>Customer Name</th>
             <th>Booking Date</th>
-            <th>Booking Time</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
-        <%
-            List<Booking> driverBookings = (List<Booking>) request.getAttribute("driverBookings");
-            if (driverBookings != null && !driverBookings.isEmpty()) {
-                for (Booking booking : driverBookings) {
-        %>
+        <% for (Booking b : bookings) { %>
         <tr>
-            <td><%= booking.getOrderNumber() %></td>
-            <td><%= booking.getCustomerName() %></td>
-            <td><%= booking.getPickupLocation() %></td>
-            <td><%= booking.getDropLocation() %></td>
-            <td><%= booking.getBookingDate() %></td>
-            <td><%= booking.getBookingTime() %></td>
-            <td><%= booking.getStatus() %></td>
-        </tr>
-        <%
-                }
-            } else {
-        %>
-        <tr>
-            <td colspan="7">No bookings assigned to you.</td>
+            <td><%= b.getOrderNumber() %></td>
+            <td><%= b.getPickupLocation() %></td>
+            <td><%= b.getDropLocation() %></td>
+            <td><%= b.getCustomerName() %></td>
+            <td><%= b.getBookingDate() %></td>
+            <td><%= b.getStatus() %></td>
+            <td>
+                <% if (!b.getStatus().equals("Accepted")) { %>
+                    <form action="AcceptBookingServlet" method="post">
+                        <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
+                        <input type="submit" value="Accept">
+                    </form>
+                <% } else { %>
+                    Accepted
+                <% } %>
+            </td>
         </tr>
         <% } %>
     </table>
-    
-    <a href="DriverBookingsServlet">View My Assigned Bookings</a>
-    
 </body>
 </html>
