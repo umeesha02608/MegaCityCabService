@@ -23,12 +23,10 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(); 
         
         if (username.equals("admin") && password.equals("admin123")) {
-            
             session.setAttribute("user", "admin");
             session.setAttribute("role", "admin");
             response.sendRedirect("admin_dashboard.jsp");
         } else {
-            
             UserDAO userDAO = new UserDAO();
             User user = userDAO.validateUser(username, password);
 
@@ -36,17 +34,20 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user.getUsername());
                 session.setAttribute("role", user.getRole());
 
-                
+                // ✅ Set customer name and address in session
+                session.setAttribute("customerName", user.getName());
+                session.setAttribute("address", user.getAddress());
+
                 if (user.getRole().equals("customer")) {
                     response.sendRedirect("customer_dashboard.jsp");
                 } else if (user.getRole().equals("driver")) {
+                    // ✅ Store the driver's username for fetching assigned bookings
+                    session.setAttribute("username", user.getUsername());
                     response.sendRedirect("driver_dashboard.jsp");
                 }
             } else {
-                
                 response.sendRedirect("login.jsp?error=Invalid Credentials!");
             }
-            
         }
     }
 }

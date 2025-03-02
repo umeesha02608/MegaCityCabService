@@ -16,9 +16,7 @@
     <% } %>
 
     <form action="RegisterServlet" method="post">
-        <label>Customer Registration ID:</label><br>
-        <input type="text" name="registrationId" required><br><br>
-
+        <!-- Registration ID is now auto-generated, so it is not required in the form -->
         <label>Name:</label><br>
         <input type="text" name="name" required><br><br>
 

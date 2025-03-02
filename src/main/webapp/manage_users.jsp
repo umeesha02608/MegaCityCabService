@@ -39,8 +39,8 @@
             <td><%= user.getUsername() %></td>
             <td><%= user.getRole() %></td>
             <td>
-                <a href="EditUserServlet?id=<%= user.getId() %>">Edit</a> |
-                <a href="DeleteUserServlet?id=<%= user.getId() %>" onclick="return confirm('Are you sure?');">Delete</a>
+                <a href="edit_user.jsp?id=<%= user.getId() %>">Edit</a> |
+                 <a href="delete_user?id=<%= user.getId() %>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
             </td>
         </tr>
         <% } %>

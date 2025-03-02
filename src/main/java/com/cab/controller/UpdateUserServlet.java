@@ -15,26 +15,33 @@ public class UpdateUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String address = request.getParameter("address");
-        String nic = request.getParameter("nic");
-        String username = request.getParameter("username");
-        String role = request.getParameter("role");
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            String address = request.getParameter("address");
+            String nic = request.getParameter("nic");
+            String username = request.getParameter("username");
+            String role = request.getParameter("role");
 
-        Users user = new Users();
-        user.setId(id);
-        user.setName(name);
-        user.setAddress(address);
-        user.setNic(nic);
-        user.setUsername(username);
-        user.setRole(role);
+            Users user = new Users();
+            user.setId(id);
+            user.setName(name);
+            user.setAddress(address);
+            user.setNic(nic);
+            user.setUsername(username);
+            user.setRole(role);
 
-        UsersDAO usersDAO = new UsersDAO();
-        if (usersDAO.updateUser(user)) {
-            response.sendRedirect("manage_users.jsp");
-        } else {
-            response.getWriter().write("Error updating user.");
+            UsersDAO usersDAO = new UsersDAO();
+            boolean updateSuccess = usersDAO.updateUser(user);
+
+            if (updateSuccess) {
+                response.sendRedirect("manage_users.jsp?success=User updated successfully");
+            } else {
+                response.sendRedirect("edit_user.jsp?id=" + id + "&error=Failed to update user");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("edit_user.jsp?id=" + request.getParameter("id") + "&error=Invalid data");
         }
     }
 }

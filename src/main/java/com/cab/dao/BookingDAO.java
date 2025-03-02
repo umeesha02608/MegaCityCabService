@@ -1,0 +1,111 @@
+package com.cab.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cab.db.DBConnection;
+import com.cab.model.Booking;
+
+public class BookingDAO {
+
+    // Existing method to add a booking
+    public boolean addBooking(Booking booking) {
+        boolean success = false;
+        String sql = "INSERT INTO booking(order_number, customer_name, address, telephone, model, driver_name, pickup_location, drop_location, distance, fare, booking_date, booking_time, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, booking.getOrderNumber());
+            ps.setString(2, booking.getCustomerName());
+            ps.setString(3, booking.getAddress());
+            ps.setString(4, booking.getTelephone());
+            ps.setString(5, booking.getModel());
+            ps.setString(6, booking.getDriverName());
+            ps.setString(7, booking.getPickupLocation());
+            ps.setString(8, booking.getDropLocation());
+            ps.setDouble(9, booking.getDistance());
+            ps.setDouble(10, booking.getFare());
+            ps.setString(11, booking.getBookingDate());
+            ps.setString(12, booking.getBookingTime());
+            ps.setString(13, booking.getStatus());
+
+            success = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+    // New method to get bookings for a specific customer
+    public List<Booking> getBookingsByCustomer(String customerName) {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM booking WHERE customer_name = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, customerName);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = new Booking(
+                    rs.getString("order_number"),
+                    rs.getString("customer_name"),
+                    rs.getString("address"),
+                    rs.getString("telephone"),
+                    rs.getString("model"),
+                    rs.getString("driver_name"),
+                    rs.getString("pickup_location"),
+                    rs.getString("drop_location"),
+                    rs.getDouble("distance"),
+                    rs.getDouble("fare"),
+                    rs.getString("booking_date"),
+                    rs.getString("booking_time"),
+                    rs.getString("status")
+                );
+                bookings.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+    
+    public List<Booking> getBookingsByDriver(String driverName) {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM booking WHERE driver_name = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setString(1, driverName);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = new Booking(
+                    rs.getString("order_number"),
+                    rs.getString("customer_name"),
+                    rs.getString("address"),
+                    rs.getString("telephone"),
+                    rs.getString("model"),
+                    rs.getString("driver_name"),
+                    rs.getString("pickup_location"),
+                    rs.getString("drop_location"),
+                    rs.getDouble("distance"),
+                    rs.getDouble("fare"),
+                    rs.getString("booking_date"),
+                    rs.getString("booking_time"),
+                    rs.getString("status") 
+                );
+                bookings.add(booking);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+
+}

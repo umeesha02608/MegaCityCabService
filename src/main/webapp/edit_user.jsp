@@ -12,17 +12,18 @@
         Users user = usersDAO.getUserById(userId);
     %>
     <form action="update_user" method="post">
-        <input type="hidden" name="id" value="<%= user.getId() %>">
-        Name: <input type="text" name="name" value="<%= user.getName() %>"><br>
-        Address: <input type="text" name="address" value="<%= user.getAddress() %>"><br>
-        NIC: <input type="text" name="nic" value="<%= user.getNic() %>"><br>
-        Username: <input type="text" name="username" value="<%= user.getUsername() %>"><br>
-        Role: 
-        <select name="role">
-            <option value="customer" <%= user.getRole().equals("customer") ? "selected" : "" %>>Customer</option>
-            <option value="driver" <%= user.getRole().equals("driver") ? "selected" : "" %>>Driver</option>
-        </select><br>
-        <input type="submit" value="Update">
-    </form>
+    <input type="hidden" name="id" value="<%= user.getId() %>">
+    Name: <input type="text" name="name" value="<%= user.getName() %>" required><br>
+    Address: <input type="text" name="address" value="<%= user.getAddress() %>" required><br>
+    NIC: <input type="text" name="nic" value="<%= user.getNic() %>" required><br>
+    Username: <input type="text" name="username" value="<%= user.getUsername() %>" required><br>
+    Role: 
+    <select name="role">
+        <option value="customer" <%= user.getRole().equals("customer") ? "selected" : "" %>>Customer</option>
+        <option value="driver" <%= user.getRole().equals("driver") ? "selected" : "" %>>Driver</option>
+    </select><br>
+    <button type="submit">Update</button>
+</form>
+
 </body>
 </html>

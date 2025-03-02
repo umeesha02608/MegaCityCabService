@@ -12,8 +12,9 @@
 <body>
     <h2>Add New User</h2>
     <form action="AddUserServlet" method="post">
-        <label>Registration ID:</label>
-        <input type="text" name="registration_id" required><br>
+        <!-- Registration ID is automatically generated, so it's no longer needed -->
+        <!-- <label>Registration ID:</label>
+        <input type="text" name="registration_id" required><br> -->
 
         <label>Name:</label>
         <input type="text" name="name" required><br>

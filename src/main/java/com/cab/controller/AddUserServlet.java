@@ -15,7 +15,7 @@ public class AddUserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String registrationId = request.getParameter("registration_id");
+        // Fetching user details from the form
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String nic = request.getParameter("nic");
@@ -23,10 +23,16 @@ public class AddUserServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
+        // Auto-generate registration ID
+        String registrationId = UsersDAO.generateRegistrationId();
+
+        // Create a new user with the generated registration ID
         Users user = new Users(registrationId, name, address, nic, username, password, role);
-        
+
+        // Register user in the database
         boolean isAdded = UsersDAO.registerUser(user);
 
+        // Redirect based on whether the user was added successfully
         if (isAdded) {
             response.sendRedirect("manage_users.jsp?success=User added successfully");
         } else {

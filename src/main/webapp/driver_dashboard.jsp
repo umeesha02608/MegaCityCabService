@@ -9,7 +9,7 @@
     <div class="container mt-4">
         <h2>Driver Dashboard</h2>
         <div class="list-group">
-            <a href="view_assigned_bookings.jsp" class="list-group-item list-group-item-action">View Assigned Bookings</a>
+            <a href="DriverBookingsServlet" class="list-group-item list-group-item-action">View Assigned Bookings</a>
             <a href="update_ride_status.jsp" class="list-group-item list-group-item-action">Update Ride Status</a>
             <a href="view_customer_details.jsp" class="list-group-item list-group-item-action">View Customer Details</a>
             <a href="logout.jsp" class="list-group-item list-group-item-action text-danger">Logout</a>

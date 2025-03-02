@@ -13,32 +13,29 @@ import com.cab.model.Users;
 public class UserDAO {
     
     
-    public User validateUser(String username, String password) {
-        User user = null;
-        try {
-            Connection conn = DBConnection.getConnection();
-            String sql = "SELECT * FROM users WHERE username=? AND password=?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, username);
-            stmt.setString(2, password);
+	public User validateUser(String username, String password) {
+	    User user = null;
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement("SELECT username, password, role, name, address FROM users WHERE username = ? AND password = ?")) {
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString("username"));
-                user.setRole(rs.getString("role"));
+	        stmt.setString(1, username);
+	        stmt.setString(2, password);
+	        ResultSet rs = stmt.executeQuery();
 
-                
-                if (!isUserInUserTable(rs.getString("username"))) {
-                    insertIntoUserTable(rs.getString("username"), password, rs.getString("role"));
-                }
-            }
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
+	        if (rs.next()) {
+	            user = new User(
+	                rs.getString("username"),
+	                rs.getString("password"),
+	                rs.getString("role"),
+	                rs.getString("name"),     // ✅ Fetch name
+	                rs.getString("address")   // ✅ Fetch address
+	            );
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return user;
+	}
 
     
     private boolean isUserInUserTable(String username) {

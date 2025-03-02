@@ -13,8 +13,13 @@ import com.cab.model.Users;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        // Generate a unique registration ID
+        String registrationId = UsersDAO.generateRegistrationId();
+
+        // Create a new user object with the generated registration ID
         Users user = new Users(
-            request.getParameter("registrationId"),
+            registrationId,  // Use the generated ID
             request.getParameter("name"),
             request.getParameter("address"),
             request.getParameter("nic"),
@@ -23,6 +28,7 @@ public class RegisterServlet extends HttpServlet {
             request.getParameter("role")
         );
 
+        // Register the user
         if (UsersDAO.registerUser(user)) {
             response.sendRedirect("login.jsp?message=Registration Successful! Please login.");
         } else {
