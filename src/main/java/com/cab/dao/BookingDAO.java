@@ -124,4 +124,53 @@ public class BookingDAO {
         }
         return success;
     }
+    
+    
+ // Fetch all bookings
+    public List<Booking> getAllBookings() {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM booking";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                bookings.add(new Booking(
+                		 rs.getString("order_number"),
+                         rs.getString("customer_name"),
+                         rs.getString("address"),
+                         rs.getString("telephone"),
+                         rs.getString("model"),
+                         rs.getString("driver_name"),
+                         rs.getString("pickup_location"),
+                         rs.getString("drop_location"),
+                         rs.getDouble("distance"),
+                         rs.getDouble("fare"),
+                         rs.getString("booking_date"),
+                         rs.getString("booking_time"),
+                         rs.getString("status")
+
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+
+ // Delete a booking
+    public boolean deleteBooking(String orderNumber) {
+        String sql = "DELETE FROM booking WHERE order_number = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, orderNumber);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+ 
 }
