@@ -23,37 +23,62 @@ public class BookCabServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         
-        String orderNumber = "ORD" + System.currentTimeMillis();
+        // Fetch session data & check if user is logged in
         String customerName = (String) session.getAttribute("customerName");
         String address = (String) session.getAttribute("address");
+
+        if (customerName == null || address == null) {
+            response.sendRedirect("login.jsp"); // Redirect to login page
+            return;
+        }
+
+        String orderNumber = "ORD" + System.currentTimeMillis();
         String telephone = request.getParameter("telephone");
         String carModel = request.getParameter("Model");
         String driverName = request.getParameter("driverName");
         String pickupLocation = request.getParameter("pickupLocation");
         String dropLocation = request.getParameter("dropLocation");
-        double distance = Double.parseDouble(request.getParameter("distance"));
-        String bookingDate = LocalDate.now().toString();
-        String bookingTime = LocalTime.now().toString();
-        
-        
-        
-     // **Calculate Fare**
-        double baseFare = 100; // LKR 100
-        double perKmRate = 50; // LKR 50 per km
-        double fare = baseFare + (perKmRate * distance);
-        
-     // **Set Default Status**
-        String status = "Pending";  
 
-        Booking booking = new Booking(orderNumber, customerName, address, telephone, carModel, driverName, pickupLocation, dropLocation, distance,fare, bookingDate, bookingTime, status);
+        double distance = 0.0;
+        try {
+            distance = Double.parseDouble(request.getParameter("distance"));
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Invalid distance value!");
+            request.getRequestDispatcher("book_cab.jsp").forward(request, response);
+            return;
+        }
+
+        // Get booking date & time from user input
+        String bookingDate = request.getParameter("bookingDate");
+        String bookingTime = request.getParameter("bookingTime");
+
+        // Ensure date & time are provided
+        if (bookingDate == null || bookingTime == null || bookingDate.isEmpty() || bookingTime.isEmpty()) {
+            request.setAttribute("error", "Please select a booking date and time.");
+            request.getRequestDispatcher("book_cab.jsp").forward(request, response);
+            return;
+        }
+
+        // Calculate Fare
+        double baseFare = 100;
+        double perKmRate = 50;
+        double fare = baseFare + (perKmRate * distance);
+
+        // Set default status
+        String status = "Pending";
+
+        // Create Booking Object
+        Booking booking = new Booking(orderNumber, customerName, address, telephone, carModel, driverName, 
+                                      pickupLocation, dropLocation, distance, fare, bookingDate, bookingTime, status);
         BookingDAO bookingDAO = new BookingDAO();
 
+        // Save booking to DB
         if (bookingDAO.addBooking(booking)) {
             request.setAttribute("message", "Booking successful! Your order number is " + orderNumber);
-            request.getRequestDispatcher("book_cab.jsp").forward(request, response);
         } else {
             request.setAttribute("error", "Booking failed! Please try again.");
-            request.getRequestDispatcher("book_cab.jsp").forward(request, response);
         }
+
+        request.getRequestDispatcher("book_cab.jsp").forward(request, response);
     }
 }

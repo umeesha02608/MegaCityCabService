@@ -40,10 +40,7 @@
             <td><%= b.getStatus() %></td>
             <td>
                 <% if (!b.getStatus().equals("Completed") && !b.getStatus().equals("Cancelled")) { %>
-                    <form action="EditBookingServlet" method="post" style="display:inline;">
-                        <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
-                        <button type="submit">Edit</button>
-                    </form>
+                    
                     <form action="CancelBookingServlet" method="post" style="display:inline;">
                         <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
                         <button type="submit" onclick="return confirm('Are you sure you want to cancel this booking?');">
@@ -51,7 +48,7 @@
                         </button>
                     </form>
                 <% } else { %>
-                    <span>Not Editable</span>
+                    <span>Cancel</span>
                 <% } %>
             </td>
         </tr>

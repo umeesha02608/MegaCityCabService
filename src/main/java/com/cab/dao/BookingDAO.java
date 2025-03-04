@@ -172,5 +172,18 @@ public class BookingDAO {
         return false;
     }
     
- 
+    public boolean cancelBooking(String orderNumber) {
+        boolean success = false;
+        String sql = "UPDATE booking SET status = 'Cancelled' WHERE order_number = ? AND status = 'Pending'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, orderNumber);
+            int rowsUpdated = pstmt.executeUpdate();
+            success = rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
 }

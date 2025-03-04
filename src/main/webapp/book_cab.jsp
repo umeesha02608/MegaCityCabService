@@ -47,15 +47,14 @@
         
         function calculateFare() {
             let distance = parseFloat(document.getElementById("distance").value);
-            let baseFare = 100; // Base fare in LKR
-            let perKmRate = 50; // Per kilometer rate in LKR
-
-            if (!isNaN(distance) && distance > 0) {
-                let totalFare = baseFare + (perKmRate * distance);
-                document.getElementById("fare").value = totalFare.toFixed(2);
-            } else {
-                alert("Please enter a valid distance to calculate fare.");
+            if (isNaN(distance) || distance <= 0) {
+                alert("Please select valid locations on the map to calculate fare.");
+                return;
             }
+            let baseFare = 100;
+            let perKmRate = 50;
+            let totalFare = baseFare + (perKmRate * distance);
+            document.getElementById("fare").value = totalFare.toFixed(2);
         }
     </script>
     
