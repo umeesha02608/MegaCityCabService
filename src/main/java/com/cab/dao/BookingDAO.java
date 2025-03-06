@@ -186,4 +186,41 @@ public class BookingDAO {
         }
         return success;
     }
+    
+    public String getBookingStatus(String orderNumber) {
+        String status = null;
+        String sql = "SELECT status FROM booking WHERE order_number = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, orderNumber);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                status = rs.getString("status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    public boolean acceptBooking(String orderNumber) {
+        boolean success = false;
+        String sql = "UPDATE booking SET status = 'Accepted' WHERE order_number = ? AND status = 'Pending'";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, orderNumber);
+            int rowsUpdated = pstmt.executeUpdate();
+            success = rowsUpdated > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return success;
+    }
+
+    
+
+
 }

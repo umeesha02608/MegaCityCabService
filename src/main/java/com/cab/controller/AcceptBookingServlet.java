@@ -1,12 +1,11 @@
 package com.cab.controller;
 
-import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import com.cab.dao.BookingDAO;
 
@@ -14,20 +13,26 @@ import com.cab.dao.BookingDAO;
 public class AcceptBookingServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
         String orderNumber = request.getParameter("orderNumber");
+        BookingDAO bookingDAO = new BookingDAO();
 
-        if (orderNumber != null && !orderNumber.isEmpty()) {
-            BookingDAO bookingDAO = new BookingDAO();
-            boolean isUpdated = bookingDAO.updateBookingStatus(orderNumber, "Accepted");
+        // Check if the booking is still valid
+        String currentStatus = bookingDAO.getBookingStatus(orderNumber);
 
-            if (isUpdated) {
-                response.sendRedirect("driver_bookings.jsp?msg=Booking Accepted!");
+        if (currentStatus.equals("Pending")) {
+            boolean accepted = bookingDAO.acceptBooking(orderNumber);
+            if (accepted) {
+                request.setAttribute("message", "Booking accepted successfully.");
             } else {
-                response.sendRedirect("driver_bookings.jsp?error=Failed to accept booking.");
+                request.setAttribute("error", "Failed to accept booking. Please try again.");
             }
         } else {
-            response.sendRedirect("driver_bookings.jsp?error=Invalid Booking.");
+            request.setAttribute("error", "Booking is no longer available.");
         }
+
+        request.getRequestDispatcher("DriverBookingsServlet").forward(request, response);
     }
 }
