@@ -12,6 +12,40 @@ import com.cab.model.Booking;
 
 public class BookingDAO {
 
+    // Method to fetch booking by order number
+    public Booking getBookingByOrderNumber(String orderNumber) {
+        Booking booking = null;
+        String sql = "SELECT * FROM booking WHERE order_number = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, orderNumber);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                booking = new Booking(
+                    rs.getString("order_number"),
+                    rs.getString("customer_name"),
+                    rs.getString("address"),
+                    rs.getString("telephone"),
+                    rs.getString("model"),
+                    rs.getString("driver_name"),
+                    rs.getString("pickup_location"),
+                    rs.getString("drop_location"),
+                    rs.getDouble("distance"),
+                    rs.getDouble("fare"),
+                    rs.getString("booking_date"),
+                    rs.getString("booking_time"),
+                    rs.getString("status")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return booking;
+    }
+    
+
     // Existing method to add a booking
     public boolean addBooking(Booking booking) {
         boolean success = false;
@@ -219,8 +253,5 @@ public class BookingDAO {
         }
         return success;
     }
-
-    
-
 
 }
