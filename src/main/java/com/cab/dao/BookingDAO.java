@@ -119,6 +119,11 @@ public class BookingDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+                String status = rs.getString("status");
+                if (status == null) {
+                    status = "Pending"; // Default to "Pending" if null
+                }
+
                 Booking booking = new Booking(
                     rs.getString("order_number"),
                     rs.getString("customer_name"),
@@ -132,7 +137,7 @@ public class BookingDAO {
                     rs.getDouble("fare"),
                     rs.getString("booking_date"),
                     rs.getString("booking_time"),
-                    rs.getString("status")
+                    status  // Use the non-null status
                 );
                 bookings.add(booking);
             }
@@ -141,6 +146,7 @@ public class BookingDAO {
         }
         return bookings;
     }
+
 
     // Update booking status (for Accept functionality)
     public boolean updateBookingStatus(String orderNumber, String status) {
@@ -184,7 +190,6 @@ public class BookingDAO {
                          rs.getString("booking_date"),
                          rs.getString("booking_time"),
                          rs.getString("status")
-
                 ));
             }
         } catch (Exception e) {
@@ -252,6 +257,43 @@ public class BookingDAO {
             e.printStackTrace();
         }
         return success;
+    }
+
+ // Update booking details
+    public boolean updateBooking(Booking booking) {
+        boolean updated = false;
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = DBConnection.getConnection();
+            String query = "UPDATE booking SET telephone = ?, pickup_location = ?, drop_location = ?, " +
+                           "status = ?, fare = ?, distance = ? WHERE order_number = ?";
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, booking.getTelephone());
+            pstmt.setString(2, booking.getPickupLocation());
+            pstmt.setString(3, booking.getDropLocation());
+           // pstmt.setString(3, booking.getDriverName());
+            pstmt.setString(4, booking.getStatus());
+            pstmt.setDouble(5, booking.getFare());
+            pstmt.setDouble(6, booking.getDistance());
+            pstmt.setString(7, booking.getOrderNumber());
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                updated = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return updated;
     }
 
 }

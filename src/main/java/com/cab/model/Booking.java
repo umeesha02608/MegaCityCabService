@@ -16,6 +16,9 @@ public class Booking {
     private String bookingTime;  
     private String status;
     
+    
+    public Booking() {
+    }
 
     // ✅ Constructor including carModel & driverName
     public Booking(String orderNumber, String customerName, String address, String telephone, 

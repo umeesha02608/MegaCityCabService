@@ -27,9 +27,13 @@
         <tr>
             <th>Order Number</th>
             <th>Customer</th>
+            <th>Telephone</th>
+            <th>Driver</th>
+            <th>Car Model</th>
             <th>Pickup</th>
             <th>Drop</th>
-            <th>Driver</th>
+            <th>Booking Date</th>
+            <th>Booking Time</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -37,25 +41,40 @@
         <tr>
             <td><%= b.getOrderNumber() %></td>
             <td><%= b.getCustomerName() %></td>
+            <td><%= b.getTelephone() %></td>
+            <td><%= b.getDriverName() %></td>
+            <td><%= b.getModel() %></td>
             <td><%= b.getPickupLocation() %></td>
             <td><%= b.getDropLocation() %></td>
-            <td><%= b.getDriverName() %></td>
-            <td><%= b.getStatus() %></td>
+            <td><%= b.getBookingDate() %></td>
+            <td><%= b.getBookingTime() %></td>
+            
             <td>
-                
+                <% 
+                    String status = (b.getStatus() != null) ? b.getStatus() : "Pending"; 
+                    boolean disableAdminUpdate = status.equals("Accepted") || status.equals("Completed"); 
+                %>
+                <form action="UpdateBookingStatusServlet" method="post" style="display:inline;">
+                    <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
+                    <select name="status" <%= disableAdminUpdate ? "disabled" : "" %>>
+                        <option value="Pending" <%= "Pending".equals(status) ? "selected" : "" %>>Pending</option>
+                        <option value="Accepted" <%= "Accepted".equals(status) ? "selected" : "" %>>Accepted</option>
+                        <option value="Completed" <%= "Completed".equals(status) ? "selected" : "" %>>Completed</option>
+                    </select>
+                    <input type="submit" value="Update" <%= disableAdminUpdate ? "disabled" : "" %>>
+                </form>
+            </td>
+            <td>
+                <!-- Delete Booking -->
                 <form action="DeleteBookingServlet" method="post" style="display:inline;">
                     <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
                     <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
                 </form>
                 
-                <form action="UpdateBookingStatusServlet" method="post" style="display:inline;">
+                <!-- Edit Booking -->
+                <form action="edit-booking.jsp" method="get" style="display:inline;">
                     <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
-                    <select name="status">
-                        <option value="Pending" <%= b.getStatus().equals("Pending") ? "selected" : "" %>>Pending</option>
-                        <option value="Accepted" <%= b.getStatus().equals("Accepted") ? "selected" : "" %>>Accepted</option>
-                        <option value="Completed" <%= b.getStatus().equals("Completed") ? "selected" : "" %>>Completed</option>
-                    </select>
-                    <input type="submit" value="Update">
+                    <input type="submit" value="Edit">
                 </form>
             </td>
         </tr>

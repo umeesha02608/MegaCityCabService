@@ -44,16 +44,15 @@
             <td><%= b.getCustomerName() %></td>
             <td><%= b.getBookingDate() %></td>
             <td><%= b.getStatus() %></td>
-            <td>
-                <% if (!b.getStatus().equals("Accepted")) { %>
-                    <form action="AcceptBookingServlet" method="post">
-                        <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
-                        <input type="submit" value="Accept">
-                    </form>
-                <% } else { %>
-                    Accepted
-                <% } %>
-            </td>
+           <td>
+			    <% if (b.getStatus() == null || !b.getStatus().equals("Accepted")) { %>
+			        <form action="AcceptBookingServlet" method="post">
+			            <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
+			            <input type="submit" value="Accept">
+			        </form>
+			    <% } %>
+		  </td>
+
         </tr>
         <% } %>
     </table>
