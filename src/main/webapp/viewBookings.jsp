@@ -37,10 +37,9 @@
             <td><%= b.getFare() %></td>
             <td><%= b.getBookingDate() %></td>
             <td><%= b.getBookingTime() %></td>
-            <td><%= b.getStatus() %></td>
+            <td><%= b.getStatus() != null ? b.getStatus() : "Pending" %></td> <!-- Prevent null values -->
             <td>
-                <% if (!b.getStatus().equals("Completed") && !b.getStatus().equals("Cancelled")) { %>
-                    
+                <% if (!"Completed".equals(b.getStatus()) && !"Cancelled".equals(b.getStatus())) { %>
                     <form action="CancelBookingServlet" method="post" style="display:inline;">
                         <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
                         <button type="submit" onclick="return confirm('Are you sure you want to cancel this booking?');">

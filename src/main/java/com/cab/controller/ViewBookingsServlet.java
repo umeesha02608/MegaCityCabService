@@ -30,6 +30,13 @@ public class ViewBookingsServlet extends HttpServlet {
         BookingDAO bookingDAO = new BookingDAO();
         List<Booking> customerBookings = bookingDAO.getBookingsByCustomer(loggedInCustomerName);
 
+        // Ensure status is not null to prevent NullPointerException
+        for (Booking booking : customerBookings) {
+            if (booking.getStatus() == null) {
+                booking.setStatus("Pending"); // Set a default value if status is null
+            }
+        }
+
         request.setAttribute("bookings", customerBookings);
         request.getRequestDispatcher("viewBookings.jsp").forward(request, response);
     }

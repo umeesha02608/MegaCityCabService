@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cab.db.DBConnection;
 import com.cab.model.Booking;
+import com.cab.model.Users;
 
 public class BookingDAO {
 
@@ -295,5 +296,39 @@ public class BookingDAO {
         }
         return updated;
     }
+
+    
+    public List<Booking> getCustomerDetailsForDriver(String driverName) {
+        List<Booking> customers = new ArrayList<>();
+        String sql = "SELECT b.customer_name, b.address, b.telephone, " +
+                     "b.pickup_location, b.drop_location, b.booking_date, b.booking_time " +
+                     "FROM booking b " +
+                     "WHERE b.driver_name = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, driverName);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking customer = new Booking();
+                customer.setCustomerName(rs.getString("customer_name"));  
+                customer.setAddress(rs.getString("address"));      
+                customer.setTelephone(rs.getString("telephone"));  
+                customer.setPickupLocation(rs.getString("pickup_location"));  
+                customer.setDropLocation(rs.getString("drop_location"));  
+                customer.setBookingDate(rs.getString("booking_date"));  
+                customer.setBookingTime(rs.getString("booking_time"));  
+
+                customers.add(customer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
+
+
 
 }
