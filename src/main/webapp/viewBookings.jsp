@@ -20,7 +20,7 @@
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
-            <th>Actions</th> <!-- New Column -->
+            <th>Actions</th>
         </tr>
         <%
             List<Booking> bookings = (List<Booking>) request.getAttribute("bookings");
@@ -37,17 +37,16 @@
             <td><%= b.getFare() %></td>
             <td><%= b.getBookingDate() %></td>
             <td><%= b.getBookingTime() %></td>
-            <td><%= b.getStatus() != null ? b.getStatus() : "Pending" %></td> <!-- Prevent null values -->
+            <td><%= b.getStatus() != null ? b.getStatus() : "Pending" %></td>
             <td>
-                <% if (!"Completed".equals(b.getStatus()) && !"Cancelled".equals(b.getStatus())) { %>
-                    <form action="CancelBookingServlet" method="post" style="display:inline;">
+                <% if ("Completed".equals(b.getStatus())) { %>
+                    <form action="payment.jsp" method="get">
                         <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
-                        <button type="submit" onclick="return confirm('Are you sure you want to cancel this booking?');">
-                            Cancel
-                        </button>
+                        <input type="hidden" name="fare" value="<%= b.getFare() %>">
+                        <button type="submit">Make Payment</button>
                     </form>
                 <% } else { %>
-                    <span>Cancel</span>
+                    <span>N/A</span>
                 <% } %>
             </td>
         </tr>
