@@ -227,15 +227,13 @@ public class BookingDAO {
         return success;
     }
     
+ // Get Booking Status
     public String getBookingStatus(String orderNumber) {
         String status = null;
-        String sql = "SELECT status FROM booking WHERE order_number = ?";
-
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, orderNumber);
-            ResultSet rs = pstmt.executeQuery();
-
+             PreparedStatement ps = conn.prepareStatement("SELECT status FROM booking WHERE order_number = ?")) {
+            ps.setString(1, orderNumber);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 status = rs.getString("status");
             }
@@ -245,19 +243,17 @@ public class BookingDAO {
         return status;
     }
 
+    // Accept Booking
     public boolean acceptBooking(String orderNumber) {
-        boolean success = false;
-        String sql = "UPDATE booking SET status = 'Accepted' WHERE order_number = ? AND status = 'Pending'";
-
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, orderNumber);
-            int rowsUpdated = pstmt.executeUpdate();
-            success = rowsUpdated > 0;
+             PreparedStatement ps = conn.prepareStatement("UPDATE booking SET status = 'Accepted' WHERE order_number = ? AND status = 'Pending'")) {
+            ps.setString(1, orderNumber);
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return success;
+        return false;
     }
 
  // Update booking details

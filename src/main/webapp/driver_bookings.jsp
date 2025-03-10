@@ -48,10 +48,11 @@
 			    <% if (b.getStatus() == null || !b.getStatus().equals("Accepted")) { %>
 			        <form action="AcceptBookingServlet" method="post">
 			            <input type="hidden" name="orderNumber" value="<%= b.getOrderNumber() %>">
-			            <input type="submit" value="Accept">
+			            <button type="submit">Accept</button>
 			        </form>
 			    <% } %>
-		  </td>
+			</td>
+
 
         </tr>
         <% } %>

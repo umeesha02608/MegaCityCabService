@@ -17,22 +17,33 @@ public class AcceptBookingServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String orderNumber = request.getParameter("orderNumber");
+        
+        if (orderNumber == null || orderNumber.isEmpty()) {
+            request.setAttribute("error", "Invalid order number.");
+            request.getRequestDispatcher("driver_bookings.jsp").forward(request, response);
+            return;
+        }
+
         BookingDAO bookingDAO = new BookingDAO();
 
-        // Check if the booking is still valid
-        String currentStatus = bookingDAO.getBookingStatus(orderNumber);
+        // Debugging
+        System.out.println("Order Number Received: " + orderNumber);
 
-        if (currentStatus.equals("Pending")) {
+        // Check if booking exists and its current status
+        String currentStatus = bookingDAO.getBookingStatus(orderNumber);
+        System.out.println("Current Booking Status: " + currentStatus);
+
+        if (currentStatus != null && currentStatus.equals("Pending")) {
             boolean accepted = bookingDAO.acceptBooking(orderNumber);
             if (accepted) {
-                request.setAttribute("message", "Booking accepted successfully.");
+                response.sendRedirect("DriverBookingsServlet"); // Refresh page after acceptance
             } else {
                 request.setAttribute("error", "Failed to accept booking. Please try again.");
+                request.getRequestDispatcher("driver_bookings.jsp").forward(request, response);
             }
         } else {
             request.setAttribute("error", "Booking is no longer available.");
+            request.getRequestDispatcher("driver_bookings.jsp").forward(request, response);
         }
-
-        request.getRequestDispatcher("DriverBookingsServlet").forward(request, response);
     }
 }
