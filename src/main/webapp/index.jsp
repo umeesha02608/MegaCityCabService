@@ -21,17 +21,17 @@
             color: #ffffff !important;
         }
         .hero-section {
-		    background: url('Images/unnamed.jpg') no-repeat center top 30%;
-		    background-size: cover;
-		    color: white;
-		    padding: 100px;
-		    text-align: center;
-		    margin-top: 50px; 
-		    min-height: 60vh;
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		}
+            background: url('Images/unnamed.jpg') no-repeat center top 30%;
+            background-size: cover;
+            color: white;
+            padding: 100px;
+            text-align: center;
+            margin-top: 50px; 
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .hero-overlay {
             background-color: rgba(0, 0, 0, 0.7);
@@ -83,6 +83,7 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-warning " href="register.jsp">Register</a></li>
                 </ul>
@@ -142,7 +143,13 @@
         <p><strong>Email:</strong> support@megacitycab.com | <strong>Phone:</strong> +94 77 123 4567</p>
     </div>
 
-    
+    <!-- Help Section -->
+    <div id="help" class="container text-center section">
+        <h2 class="section-title">Need Help?</h2>
+        <p>Find answers to common questions or reach out for support.</p>
+        <a href="help.jsp" class="btn btn-primary">Visit Help Center</a>
+    </div>
+
     <div class="footer">
         <p>&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
     </div>
