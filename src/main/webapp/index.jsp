@@ -19,7 +19,7 @@
         }
         .navbar-brand {
             font-weight: bold;
-            color: #ffffff !important;
+            color: #000000 !important;
         }
         .hero-section {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Images/unnamed.jpg') no-repeat center center/cover;
@@ -85,7 +85,7 @@
         
         .footer {
             background-color: #343a40;
-            color: white;
+            color: #000000;
             padding: 20px;
             text-align: center;
         }
@@ -93,7 +93,7 @@
 </head>
 <body>
        <!-- Updated Header (Navbar) -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #002147; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ECDFCC; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
     <div class="container">
         <a class="navbar-brand" href="#">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -206,9 +206,9 @@
         </div>
     </div>
     
-   <div id="help" class="container text-center section" style="padding: 60px 20px; background-color: #002147; color: white; border-radius: 10px; margin-top: 50px;">
-    <h2 class="section-title" style="color: #ffcc00; font-size: 2.5rem;">Need Help?</h2>
-    <p style="font-size: 1.2rem; max-width: 700px; margin: 10px auto; color: #f8f9fa;">
+   <div id="help" class="container text-center section" style="padding: 40px 20px; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Images/anxiety-induced-by-traffic.jpg') no-repeat center center/cover; color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; margin-top: 50px;">
+    <h2 class="section-title" style="color: #F8E559; font-size: 2.5rem;">Need Help?</h2>
+    <p style="font-size: 1.2rem; max-width: 700px; margin: 10px auto; color: #ffffff;">
         Facing any issues? Find answers to common questions or reach out to our support team.
     </p>
     <a href="help.jsp" class="btn btn-custom" style="padding: 12px 24px; font-size: 1.2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color: #ffcc00; color: black; font-weight: bold; transition: 0.3s;">
@@ -218,10 +218,10 @@
 <br>
 
    <!-- Updated Footer -->
-<footer class="footer mt-auto py-3 text-white text-center" style="background-color: #002147;">
+<footer class="footer mt-auto py-3 text-white text-center" style="background-color: #ECDFCC;">
     <div class="container">
-        <p class="mb-0">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
-        <small>Designed for a seamless travel experience in Colombo</small>
+        <p class="mb-0"  style="color: #000000; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
+        
     </div>
 </footer>
 <!-- Help Section -->
