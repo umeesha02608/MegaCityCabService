@@ -45,7 +45,7 @@
             transition: 0.3s;
         }
         .btn-custom:hover {
-            background-color: #ffdb4d;
+            background-color: #ffcc00;
         }
         .section-title {
             font-weight: bold;

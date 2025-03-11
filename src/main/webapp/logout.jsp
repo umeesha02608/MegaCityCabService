@@ -3,3 +3,7 @@
     session.invalidate();
     response.sendRedirect("index.jsp?message=Successfully Logged Out");
 %>
+
+
+
+

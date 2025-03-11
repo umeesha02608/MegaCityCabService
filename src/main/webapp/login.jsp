@@ -55,8 +55,8 @@
 		}
 
         .login-container {
-            width: 100%; 
-            max-width: 500px;
+            width: 80%; 
+             max-width: 400px;
             padding: 30px;
             background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -116,8 +116,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
@@ -125,7 +125,7 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav><br><br>
 
 <!-- Outer Container (with background image) -->
 <div class="outer-container">
@@ -140,13 +140,13 @@
         <% } %>
         
         <form action="LoginServlet" method="post">
-            <div class="mb-3">
-                <label class="form-label" style="color: #000000; font-weight: bold">Username</label>
+            <div class="mb-2">
+                <label class="form-label" style="color: #000000;">Username</label>
                 <input type="text" name="username" class="form-control" required>
             </div>
             
             <div class="mb-3">
-                <label class="form-label" style="color: #000000; font-weight: bold">Password</label>
+                <label class="form-label" style="color: #000000;">Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
             
