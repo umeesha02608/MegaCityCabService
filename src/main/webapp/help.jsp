@@ -94,7 +94,7 @@
                 <textarea class="form-control" id="query" name="query" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </form><br>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
