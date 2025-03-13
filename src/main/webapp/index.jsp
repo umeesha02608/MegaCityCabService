@@ -33,7 +33,7 @@
         }
         
         .hero-section {
-           background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/taxibooking.jpg') center/cover no-repeat;
+           background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('Images/taxibooking.jpg') center/cover no-repeat;
             color: white;
             padding: 120px 20px;
             text-align: center;
