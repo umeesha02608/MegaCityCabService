@@ -34,27 +34,24 @@
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/people-driving-cars-city-street.jpg') center/cover no-repeat;
         }
 
-        /* Navbar */
-        .navbar {
-		    position: fixed;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    background-color: #ECDFCC;
-		    padding: 15px;
-		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		    z-index: 1000; /* Ensures it's always above other elements */
-		}
-		
+             .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
         .navbar-brand {
             font-weight: bold;
-            color: #000000 !important;
+            font-size: 24px;
+            color: #ffffff !important;
         }
 
-        .navbar-nav .nav-link {
-            font-size: 16px;
+ 			 .nav-link
+        {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff !important;
         }
+
        
 		.container1 {
 		    width: 100%;
@@ -203,21 +200,21 @@
     
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
+ <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.3); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="index.jsp">Mega City Cab</a>
+        <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link text-dark" href="index.jsp#about">About</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="index.jsp#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="contact.jsp">Contact</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="help.jsp">Help</a></li>
-                <li class="nav-item"><a class="nav-link text-dark" href="login.jsp">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
                 <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
-                <li class="nav-item">
+                 <li class="nav-item">
                     <a class="btn logout-btn ms-2" href="index.jsp" onclick="return confirmLogout();">Logout</a>
                 </li>
             </ul>
@@ -282,12 +279,13 @@
 </div>
 
     
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3 text-white text-center" style="background-color: #ECDFCC;">
+    !-- Footer -->
+    <footer class="footer mt-auto py-3 text-white text-center" style="background: rgba(255, 255, 255, 0.3);">
         <div class="container">
-            <p style="color: #000000; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
+            <p style="color: #ffffff; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
         </div>
     </footer>
+    
     
     <script>
         // Initialize Map (Using OpenStreetMap)

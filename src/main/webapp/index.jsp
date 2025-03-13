@@ -13,16 +13,27 @@
             background-color: #f8f9fa;
             font-family: 'Arial', sans-serif;
         }
+            /* Navbar */
         .navbar {
-            background-color: #002147;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .navbar-brand {
             font-weight: bold;
-            color: #000000 !important;
+            font-size: 24px;
+            color: #ffffff !important;
         }
+
+ 			 .nav-link
+        {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff !important;
+        }
+        
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Images/unnamed.jpg') no-repeat center center/cover;
+           background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/taxibooking.jpg') center/cover no-repeat;
             color: white;
             padding: 120px 20px;
             text-align: center;
@@ -57,6 +68,7 @@
             background-color: #ffffff;
             padding: 60px 20px;
             text-align: center;
+            
         }
         .about-text {
             font-size: 1.2rem;
@@ -89,11 +101,13 @@
             padding: 20px;
             text-align: center;
         }
+        
+       
     </style>
 </head>
 <body>
        <!-- Updated Header (Navbar) -->
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ECDFCC; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
         <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -101,8 +115,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
@@ -115,14 +129,18 @@
     
 
     <div class="hero-section">
-        <h1>Reliable Rides, Anytime, Anywhere</h1>
-        <p>Your trusted cab service in Colombo City. Book a ride, manage drivers, and streamline your travels effortlessly.</p>
-        <a href="register.jsp" class="btn btn-custom">Get Started</a>
-    </div>
+    <h1>Reliable Rides, Anytime, Anywhere</h1>
+    <p>Your trusted cab service in Colombo City. <br>
+    Whether you need a quick ride to work, a comfortable trip to the airport, or a safe journey home, we have got you covered. <br>
+    Book a ride, manage drivers, and streamline your travels effortlessly with our reliable and affordable service.</p>
+    
+    <a href="register.jsp" class="btn btn-custom">Get Started</a>
+</div>
 
-    <div id="about" class="container text-center section" style="padding: 60px 20px; background-color: #f4f4f4; border-radius: 10px; margin-top: 50px;">
-    <h2 class="section-title" style="color: #002147; font-size: 2.5rem; font-weight: bold;">About Mega City Cab</h2>
-    <p style="font-size: 1.2rem; max-width: 800px; margin: 10px auto; color: #333;">
+
+    <div id="about" class="container text-center section" style="padding: 60px 20px;  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Images/unnamed.jpg') no-repeat center center/cover; border-radius: 10px; margin-top: 50px;">
+    <h2 class="section-title" style="color: #ffffff; font-size: 2.5rem; font-weight: bold;">About Mega City Cab</h2>
+    <p style="font-size: 1.2rem; max-width: 800px; margin: 10px auto; color: #fff;">
         Mega City Cab is your trusted transportation partner, offering safe, reliable, and affordable cab services across Colombo. 
         Whether it is a daily commute, airport transfer, or a long-distance journey, we ensure a seamless and comfortable ride.
     </p>
@@ -160,7 +178,7 @@
     </div>
 
     <div class="mt-5">
-        <a href="contact.jsp" class="btn btn-custom" style="padding: 12px 24px; font-size: 1.2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color: #002147; color: white; font-weight: bold; transition: 0.3s;">
+        <a href="contact.jsp" class="btn btn-custom" style="padding: 12px 24px; font-size: 1.2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); background-color: #ffcc00; color: black; font-weight: bold; transition: 0.3s;">
             Contact Us
         </a>
     </div>
@@ -218,7 +236,7 @@
 <br>
 
    <!-- Updated Footer -->
-<footer class="footer mt-auto py-3 text-white text-center" style="background-color: #ECDFCC;">
+<footer class="footer mt-auto py-3 text-white text-center" style="background: rgba(200, 200, 200, 1.7);">
     <div class="container">
         <p class="mb-0"  style="color: #000000; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
         

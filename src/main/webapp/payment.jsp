@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment</title>
+    <title>Secure Payment</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    
     <script>
         function toggleCardDetails() {
             var paymentMethod = document.getElementById("paymentMethod").value;
@@ -16,40 +19,66 @@
         }
     </script>
 </head>
-<body>
-    <h2>Payment Page</h2>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center text-primary"><i class="fas fa-credit-card"></i> Payment</h2>
+            <%
+                String orderNumber = request.getParameter("orderNumber");
+                String fare = request.getParameter("fare");
+            %>
 
-    <%
-        String orderNumber = request.getParameter("orderNumber");
-        String fare = request.getParameter("fare");
-    %>
+            <form action="ProcessPaymentServlet" method="post">
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-receipt"></i> Order Number:</label>
+                    <input type="text" name="orderNumber" class="form-control" value="<%= orderNumber %>" readonly>
+                </div>
 
-    <form action="ProcessPaymentServlet" method="post">
-        <label>Order Number:</label>
-        <input type="text" name="orderNumber" value="<%= orderNumber %>" readonly><br>
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-money-bill-wave"></i> Amount (LKR):</label>
+                    <input type="text" name="amount" class="form-control" value="<%= fare %>" readonly>
+                </div>
 
-        <label>Amount (LKR):</label>
-        <input type="text" name="amount" value="<%= fare %>" readonly><br>
+                <div class="mb-3">
+                    <label class="form-label"><i class="fas fa-wallet"></i> Payment Method:</label>
+                    <select name="paymentMethod" id="paymentMethod" class="form-select" onchange="toggleCardDetails()">
+                        <option value="Cash">Cash</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                    </select>
+                </div>
 
-        <label>Payment Method:</label>
-        <select name="paymentMethod" id="paymentMethod" onchange="toggleCardDetails()">
-            <option value="Cash">Cash</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="Debit Card">Debit Card</option>
-        </select><br>
+                <div id="cardDetails" class="border rounded p-3 bg-light" style="display: none;">
+                    <h5 class="text-dark"><i class="fas fa-credit-card"></i> Card Details</h5>
+                    
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-id-card"></i> Card Number:</label>
+                        <input type="text" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
+                    </div>
 
-        <div id="cardDetails" style="display: none;">
-            <label>Card Number:</label>
-            <input type="text" name="cardNumber" required><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label"><i class="far fa-calendar-alt"></i> Expiry Date:</label>
+                            <input type="month" name="expiryDate" class="form-control" required>
+                        </div>
 
-            <label>Expiry Date:</label>
-            <input type="text" name="expiryDate" required><br>
+                        <div class="col-md-6">
+                            <label class="form-label"><i class="fas fa-lock"></i> CVV:</label>
+                            <input type="password" name="cvv" class="form-control" placeholder="123" required>
+                        </div>
+                    </div>
+                </div>
 
-            <label>CVV:</label>
-            <input type="text" name="cvv" required><br>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check-circle"></i> Pay Now
+                    </button>
+                    <a href="index.jsp" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Cancel
+                    </a>
+                </div>
+            </form>
         </div>
-
-        <button type="submit">Pay Now</button>
-    </form>
+    </div>
 </body>
 </html>

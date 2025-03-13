@@ -21,6 +21,8 @@
 		    display: flex;
 		    flex-direction: column;
 		    margin: 0;
+		    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/street-night-with-traffic.jpg') no-repeat center center;*/
+		    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/taxibooking.jpg') center/cover no-repeat;
 		}
 
         .content-wrapper {
@@ -32,14 +34,22 @@
         }
 
         
-        .navbar {
-            background-color: #ECDFCC;
-            padding: 15px;
+       .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
             font-weight: bold;
-            color: #000000 !important;
+            font-size: 24px;
+            color: #ffffff !important;
+        }
+
+ 			 .nav-link
+        {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff !important;
         }
 
         /* New Larger Container */
@@ -49,7 +59,7 @@
 		    display: flex;
 		    justify-content: center; /* Horizontally center */
 		    align-items: center; /* Vertically center */
-		    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/street-night-with-traffic.jpg') no-repeat center center;
+		    
 		    background-size: cover;
 		    margin: 0 auto; /* Centers it horizontally in case of large screens */
 		}
@@ -96,19 +106,20 @@
             background-color: #ffdb4d;
         }
 
-        /* Footer Styling */
         .footer {
-            background-color: #ECDFCC;
-            color: white;
+            
             text-align: center;
-            padding: 15px 0;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
         }
 
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ECDFCC; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
         <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -141,13 +152,13 @@
         
         <form action="LoginServlet" method="post">
             <div class="mb-2">
-                <label class="form-label" style="color: #000000;">Username</label>
-                <input type="text" name="username" class="form-control" required>
+                <label class="form-label" style="color: #000000;">Username:</label>
+                <input type="text" name="username" class="form-control" placeholder= "Username" required>
             </div>
             
             <div class="mb-3">
-                <label class="form-label" style="color: #000000;">Password</label>
-                <input type="password" name="password" class="form-control" required>
+                <label class="form-label" style="color: #000000;">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder= "Password" required>
             </div>
             
             <button type="submit" class="btn btn-custom1">Login</button>
@@ -157,12 +168,12 @@
     </div>
 </div>
 
-<!-- Footer -->
-<footer class="footer mt-auto py-3 text-white text-center" style="background-color: #ECDFCC;">
-    <div class="container">
-        <p style="color: #000000; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
-    </div>
-</footer>
+ <!-- Footer -->
+    <footer class="footer" style="background: rgba(255, 255, 255, 0.4); ">
+        <div class="container">
+            <p>&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -15,14 +15,22 @@
             margin: 0;
         }
 
-        .navbar {
-            background-color: #ECDFCC;
-            padding: 15px;
+         .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
             font-weight: bold;
-            color: #000000 !important;
+            font-size: 24px;
+            color: #ffffff !important;
+        }
+
+ 			 .nav-link
+        {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff !important;
         }
 
         .contact-section {
@@ -35,7 +43,7 @@
 
         .contact-container {
             background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
-            padding: 30px;
+            padding: 50px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             max-width: 500px; /* Reduced width for a smaller form */
@@ -65,12 +73,13 @@
             background-color: #e6b800;
         }
 
+
        
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top" style="background-color: #ECDFCC; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
         <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -83,13 +92,15 @@
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                <li class="nav-item" style="background-color: #ECDFCC;"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
+                <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
             </ul>
         </div>
     </div>
-</nav><br><br>
+</nav>
+
 
 <section class="contact-section">
+<br><br>
     <div class="container">
 
         <div class="row justify-content-center">
@@ -97,22 +108,19 @@
                 <div class="contact-container">
                     <h2 class="mb-2" style="font-size: 22px">Get in Touch</h2>
                     <p class="mb-2" style="font-size: 14px">We would love to hear from you! Fill out the form below to get in touch.</p>
-                    <div class="contact-form">
-                        <form id="contact-form" action="" method="post">
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
-                            </div>
-                            <div class="mb-3">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                            </div>
-                            <div class="mb-3">
-                                <textarea class="form-control" name="message" id="message" rows="4" placeholder="Your Message" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-custom btn-block">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
+                    <!-- Query Form -->
+               
+							 <div class="container1">
+			    <div class="query-form text-center">
+
+			        <form action="SubmitQueryServlet" method="post">
+			            <input type="text" class="form-control mb-2" placeholder="Your Name" name="name" required>
+			            <input type="email" class="form-control mb-2" placeholder="Your Email" name="email" required>
+			            <textarea class="form-control mb-2" placeholder="Your Query" name="query" rows="3" required></textarea>
+			            <button type="submit" class="btn btn-custom w-100">Submit</button>
+			        </form>
+			    </div>
+			</div>
                 </div>
             </div>
         </div>
@@ -123,6 +131,8 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 
 </body>
 </html>

@@ -40,6 +40,6 @@ public class SubmitQueryServlet extends HttpServlet {
         }
 
         // Forward back to help.jsp
-        request.getRequestDispatcher("help.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

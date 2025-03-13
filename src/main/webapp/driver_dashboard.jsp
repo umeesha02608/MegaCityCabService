@@ -17,25 +17,27 @@
             flex-direction: column;
             margin: 0;
             font-family: 'Arial', sans-serif;
+             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('Images/admindashboard.jpg') center/cover no-repeat;
         }
 
-        /* Navbar */
-        .navbar {
-            background-color: #ECDFCC;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
             font-weight: bold;
-            color: #000000 !important;
+            font-size: 24px;
+            color: #ffffff !important;
         }
 
-        .navbar-nav .nav-link {
-            font-size: 16px;
+ 			 .nav-link
+        {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffffff !important;
         }
         
-         /* Button */
         .btn-custom {
             background-color: #ffcc00;
             color: #000;
@@ -47,13 +49,20 @@
         .btn-custom:hover {
             background-color: #e6b800;
         }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc3545;
+        }
         
 
         /* Dashboard Container */
         .dashboard-container {
-            background-image: url('Images/admindashboard.jpg'); /* Add your background image URL here */
-            background-size: cover;
-            background-position: center;
+            
             height: 100%;
             padding: 40px 0;
             display: flex;
@@ -104,7 +113,7 @@
         }
 
         .footer {
-            background-color: #ECDFCC;
+            
             text-align: center;
             padding: 10px 0;
             font-size: 14px;
@@ -117,7 +126,7 @@
 <body>
 
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.3); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
         <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -131,9 +140,9 @@
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
                 <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
-                    <li class="nav-item">
-                        <a class="btn logout-btn ms-2" href="index.jsp" onclick="return confirmLogout();">Logout</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="btn logout-btn ms-2" href="index.jsp" onclick="return confirmLogout();">Logout</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -187,13 +196,12 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3 text-white text-center" style="background-color: #ECDFCC;">
+   <!-- Footer -->
+    <footer class="footer mt-auto py-3 text-white text-center" style="background: rgba(255, 255, 255, 0.3);">
         <div class="container">
-            <p style="color: #000000; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
+            <p style="color: #ffffff; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
         </div>
     </footer>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
