@@ -28,11 +28,12 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
+           .navbar-brand {
+            font-family: Verdana;
+            font-size: 12px;
             color: #ffffff !important;
         }
+
 
  			 .nav-link
         {
@@ -117,25 +118,48 @@
             font-weight: bold;
             color: #ffffff;
         }
+        
+         .logo-container {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    height: 50px; /* Adjust height as needed */
+		    
+		}
+
+		.logo {
+		    height: 140px;
+		    width: auto;
+		    margin-right: 10px;
+		    
+		}
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
-        <div class="container">
-            <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="help.jsp">Help</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                    <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
+    <div class="container">
+        <!-- Logo Container -->
+        <a class="navbar-brand d-flex align-items-center" href="index.jsp">
+            <div class="logo-container">
+                <img src="Images/Logo.png" alt="Mega City Cab Logo" class="logo">
+                MEGA CITY CABS
+                
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+            	<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+                <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
                 </ul>
             </div>
         </div>

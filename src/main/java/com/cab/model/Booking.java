@@ -124,9 +124,9 @@ public class Booking {
         this.bookingTime = bookingTime;
     }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return (status != null) ? status : "Pending";
+    }
 
 	public void setStatus(String status) {
 		this.status = status;

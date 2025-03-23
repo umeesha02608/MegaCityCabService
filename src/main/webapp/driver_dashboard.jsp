@@ -1,15 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" %>
+<%
+    String customerName = (String) session.getAttribute("customerName");
+    if (customerName == null) {
+        response.sendRedirect("login.jsp"); // Redirect to login if not logged in
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Driver Dashboard - Mega City Cab</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script>
-        function confirmLogout() {
-            return confirm("Are you sure you want to log out?");
+     <script>
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent the default link action
+        if (confirm("Are you sure you want to log out?")) {
+            window.location.href = "logout.jsp"; // Redirect to logout.jsp
         }
-    </script>
+    }
+</script>
     <style>
         html, body {
             height: 100%;
@@ -25,11 +35,12 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
+          .navbar-brand {
+            font-family: Verdana;
+            font-size: 12px;
             color: #ffffff !important;
         }
+
 
  			 .nav-link
         {
@@ -121,28 +132,66 @@
             bottom: 0;
             width: 100%;
         }
+        
+         .logo-container {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    height: 50px; /* Adjust height as needed */
+		    
+		}
+
+		.logo {
+		    height: 140px;
+		    width: auto;
+		    margin-right: 10px;
+		    
+		}
+		
+		#userDropdown {
+		    color: #ffcc00 !important; /* Change to your preferred color */
+		    font-weight: bold;
+		}
+		#userDropdown:hover {
+		    color: #e6b800 !important; /* Darker shade on hover */
+		}
+		
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.3); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
+<nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
-        <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
+        <!-- Logo Container -->
+        <a class="navbar-brand d-flex align-items-center" href="index.jsp">
+            <div class="logo-container">
+                <img src="Images/Logo.png" alt="Mega City Cab Logo" class="logo">
+                MEGA CITY CABS
+                
+            </div>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+            	<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
-                <li class="nav-item">
-                    <a class="btn logout-btn ms-2" href="index.jsp" onclick="return confirmLogout();">Logout</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                    style="color: #ffcc00; font-weight: bold; background-color: #333; padding: 8px 12px; border-radius: 5px;">
+					    <i class="fas fa-user"></i> <%= customerName %>
+					</a>
+
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item logout-btn" href="#" onclick="confirmLogout(event);"> Logout</a></li>
+                    </ul>
                 </li>
+
             </ul>
         </div>
     </div>

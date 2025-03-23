@@ -37,7 +37,7 @@ public class ProcessPaymentServlet extends HttpServlet {
             if (rows > 0) {
                 if ("Cash".equals(paymentMethod)) {
                     // Directly redirect to bill download if payment is Cash
-                    response.sendRedirect("bill.jsp?orderNumber=" + orderNumber);
+                    response.sendRedirect("print_bill.jsp?orderNumber=" + orderNumber);
                 } else {
                     // Redirect to card processing page for card payments
                     request.setAttribute("orderNumber", orderNumber);

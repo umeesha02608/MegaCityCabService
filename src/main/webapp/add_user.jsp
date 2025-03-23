@@ -15,10 +15,13 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <script>
-        function confirmLogout() {
-            return confirm("Are you sure you want to log out?");
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent the default link action
+        if (confirm("Are you sure you want to log out?")) {
+            window.location.href = "logout.jsp"; // Redirect to logout.jsp
         }
-    </script>
+    }
+</script>
 
     <style>
         html, body {
@@ -101,6 +104,7 @@
         .logout-btn:hover {
             background-color: #c82333;
         }
+        
         h2 {
             color: #4e73df;
             margin-bottom: 20px;
@@ -164,12 +168,15 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+            	<li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
+               <li class="nav-item">
+				    <a class="btn logout-btn ms-2" href="#" onclick="confirmLogout(event);">Logout</a>
+				</li>
             </ul>
         </div>
     </div>

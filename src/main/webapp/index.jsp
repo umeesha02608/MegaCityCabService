@@ -20,8 +20,8 @@
         }
 
         .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
+            font-family: Verdana;
+            font-size: 12px;
             color: #ffffff !important;
         }
 
@@ -103,18 +103,40 @@
         }
         
        
+       .logo-container {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    height: 50px; /* Adjust height as needed */
+		    
+		}
+
+		.logo {
+		    height: 140px;
+		    width: auto;
+		    margin-right: 10px;
+		    
+		}
     </style>
 </head>
 <body>
        <!-- Updated Header (Navbar) -->
 <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
-        <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
+        <!-- Logo Container -->
+        <a class="navbar-brand d-flex align-items-center" href="index.jsp">
+            <div class="logo-container">
+                <img src="Images/Logo.png" alt="Mega City Cab Logo" class="logo">
+                MEGA CITY CABS
+                
+            </div>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+           		 <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
@@ -139,7 +161,7 @@
 
 
     <div id="about" class="container text-center section" style="padding: 60px 20px;  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Images/unnamed.jpg') no-repeat center center/cover; border-radius: 10px; margin-top: 50px;">
-    <h2 class="section-title" style="color: #ffffff; font-size: 2.5rem; font-weight: bold;">About Mega City Cab</h2>
+    <h2 class="section-title" style="color:#ffcc00; font-size: 32px; font-weight: bold;">About Mega City Cab</h2>
     <p style="font-size: 1.2rem; max-width: 800px; margin: 10px auto; color: #fff;">
         Mega City Cab is your trusted transportation partner, offering safe, reliable, and affordable cab services across Colombo. 
         Whether it is a daily commute, airport transfer, or a long-distance journey, we ensure a seamless and comfortable ride.
@@ -186,43 +208,44 @@
 
 
 
-        <div id="services" class="services-section" style="background-color: #f8f9fa; padding: 80px 20px;">
-        <h2 class="section-title">Our Services</h2>
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-                        <img src="Images/screenshot_2019-05-06_at_16.15.17.png" alt="Customer Booking" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
-                        <div style="padding: 20px; text-align: center;">
-                            <i class="fas fa-car icon-box" style="font-size: 40px; color: #ffcc00;"></i>
-                            <h5>Customer Booking</h5>
-                            <p>Easily book a cab with our seamless online booking system.</p>
-                        </div>
+<div id="services" class="services-section" style="background-color: black; padding: 80px 20px; border-radius: 15px; margin-top: 50px;">
+    <h2 class="section-title" style="color: #ffcc00; text-align: center; margin-bottom: 40px;">Our Services</h2>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); background-color: #222; transition: transform 0.3s;">
+                    <img src="Images/screenshot_2019-05-06_at_16.15.17.png" alt="Customer Booking" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                    <div style="padding: 20px; text-align: center; color: white;">
+                        <i class="fas fa-car icon-box" style="font-size: 40px; color: #ffcc00;"></i>
+                        <h5>Customer Booking</h5>
+                        <p>Easily book a cab with our seamless online booking system.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-                        <img src="Images/driver_management.jpg" alt="Driver Management" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
-                        <div style="padding: 20px; text-align: center;">
-                            <i class="fas fa-users icon-box" style="font-size: 40px; color: #ffcc00;"></i>
-                            <h5>Driver Management</h5>
-                            <p>Manage and track drivers with real-time monitoring.</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); background-color: #222; transition: transform 0.3s;">
+                    <img src="Images/driver_management.jpg" alt="Driver Management" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                    <div style="padding: 20px; text-align: center; color: white;">
+                        <i class="fas fa-users icon-box" style="font-size: 40px; color: #ffcc00;"></i>
+                        <h5>Driver Management</h5>
+                        <p>Manage and track drivers with real-time monitoring.</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-                        <img src="Images/payments.jpg" alt="Billing & Payments" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
-                        <div style="padding: 20px; text-align: center;">
-                            <i class="fas fa-credit-card icon-box" style="font-size: 40px; color: #ffcc00;"></i>
-                            <h5>Billing & Payments</h5>
-                            <p>Generate bills and make secure online payments for your rides.</p>
-                        </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service-card" style="overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); background-color: #222; transition: transform 0.3s;">
+                    <img src="Images/payments.jpg" alt="Billing & Payments" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                    <div style="padding: 20px; text-align: center; color: white;">
+                        <i class="fas fa-credit-card icon-box" style="font-size: 40px; color: #ffcc00;"></i>
+                        <h5>Billing & Payments</h5>
+                        <p>Generate bills and make secure online payments for your rides.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     
    <div id="help" class="container text-center section" style="padding: 40px 20px; background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('Images/anxiety-induced-by-traffic.jpg') no-repeat center center/cover; color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px; margin-top: 50px;">
     <h2 class="section-title" style="color: #F8E559; font-size: 2.5rem;">Need Help?</h2>

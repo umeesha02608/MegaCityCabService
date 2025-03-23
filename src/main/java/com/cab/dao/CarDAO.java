@@ -3,6 +3,7 @@ package com.cab.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,19 +71,22 @@ public class CarDAO {
         return status;
     }
 
-    public boolean deleteCar(int id) {
-        boolean status = false;
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "DELETE FROM cars WHERE id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
+    public boolean deleteCar(int carId) {
+        String sql = "DELETE FROM cars WHERE id = ?";
 
-            status = ps.executeUpdate() > 0;
-        } catch (Exception e) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, carId);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return status;
+        return false;
     }
+
     
     public Car getCarById(int id) {
         Car car = null;

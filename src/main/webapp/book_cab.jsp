@@ -2,6 +2,13 @@
 <%@ page import="java.sql.*, java.util.*" %>
 <%@ page import="com.cab.dao.CarDAO" %>
 <%@ page import="com.cab.model.Car" %>
+
+<% if (request.getAttribute("successMessage") != null) { %>
+    <script>
+        alert("<%= request.getAttribute("successMessage") %>");
+    </script>
+<% } %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +25,13 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
     <script>
-        function confirmLogout() {
-            return confirm("Are you sure you want to log out?");
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent the default link action
+        if (confirm("Are you sure you want to log out?")) {
+            window.location.href = "logout.jsp"; // Redirect to logout.jsp
         }
-    </script>
+    }
+</script>
 
     <style>
         html, body {
@@ -40,10 +50,11 @@
         }
 
         .navbar-brand {
-            font-weight: bold;
-            font-size: 24px;
+            font-family: Verdana;
+            font-size: 12px;
             color: #ffffff !important;
         }
+
 
  			 .nav-link
         {
@@ -65,15 +76,16 @@
 		
 		.btn-custom {
             background-color: #ffcc00;
-            color: black;
+            color: #000;
             padding: 10px 20px;
-            font-size: 1.2rem;
             border-radius: 8px;
-            transition: 0.3s;
+            font-weight: bold;
         }
+
         .btn-custom:hover {
-            background-color: #ffcc00;
+            background-color: #e6b800;
         }
+
 		
 		h2 {
 		    color: #333;
@@ -173,7 +185,20 @@
 		    background-color: #0056b3;
 		}
 		
-		
+		 .logo-container {
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    height: 50px; /* Adjust height as needed */
+		    
+		}
+
+		.logo {
+		    height: 140px;
+		    width: auto;
+		    margin-right: 10px;
+		    
+		}
         
     </style>
     
@@ -200,29 +225,36 @@
     
 </head>
 <body>
- <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.3); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
+ <nav class="navbar navbar-expand-lg fixed-top" style="background: rgba(255, 255, 255, 0.4); box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);">
     <div class="container">
-        <a class="navbar-brand" href="index.jsp">Mega City Cab</a>
+        <!-- Logo Container -->
+        <a class="navbar-brand d-flex align-items-center" href="index.jsp">
+            <div class="logo-container">
+                <img src="Images/Logo.png" alt="Mega City Cab Logo" class="logo">
+                MEGA CITY CABS
+                
+            </div>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.jsp">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.jsp#services">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.jsp">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="help.jsp">Help</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
-                <li class="nav-item"><a class="btn btn-custom ms-2" href="register.jsp">Register</a></li>
+                
                  <li class="nav-item">
-                    <a class="btn logout-btn ms-2" href="index.jsp" onclick="return confirmLogout();">Logout</a>
-                </li>
+				    <a class="btn logout-btn ms-2" href="#" onclick="confirmLogout(event);">Logout</a>
+				</li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container1">
-    <h2 style = "text-align: center; color: #ffffff; font-weight: bold">Book a Cab</h2>
+    <h2 style = "text-align: center; color: #002147; font-weight: bold">Book a Cab</h2>
     <form action="BookCabServlet" method="post">
         <input type="text" id="customerName" name="customerName" 
                placeholder="Customer Name" value="<%= session.getAttribute("customerName") %>" readonly>
@@ -269,6 +301,10 @@
         <input type="text" name="status" value="Pending" readonly>
 
         <button type="submit">Book Now</button>
+        
+        <a href="customer_dashboard.jsp">
+    <button type="button" class="btn btn-secondary mt-2">Back</button>
+</a>
     </form>
 
     <% if (request.getAttribute("error") != null) { %>
@@ -277,14 +313,6 @@
 
     <a href="ViewBookingsServlet"><button>View All Bookings</button></a>
 </div>
-
-    
-    !-- Footer -->
-    <footer class="footer mt-auto py-3 text-white text-center" style="background: rgba(255, 255, 255, 0.3);">
-        <div class="container">
-            <p style="color: #ffffff; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
-        </div>
-    </footer>
     
     
     <script>
@@ -369,5 +397,12 @@
             }
         }
     </script>
+    
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 text-white text-center" style="background: rgba(255, 255, 255, 0.3);">
+        <div class="container">
+            <p style="color: #ffffff; font-weight: bold;">&copy; 2025 Mega City Cab Service | All Rights Reserved</p>
+        </div>
+    </footer>
 </body>
 </html>

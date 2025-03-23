@@ -1,5 +1,6 @@
 package com.cab.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -74,10 +75,17 @@ public class BookCabServlet extends HttpServlet {
 
         // Save booking to DB
         if (bookingDAO.addBooking(booking)) {
-            request.setAttribute("message", "Booking successful! Your order number is " + orderNumber);
+        	// Assuming booking is successful
+            request.setAttribute("successMessage", "Booking added successfully!");
+            // Forward to the JSP page
+            RequestDispatcher dispatcher = request.getRequestDispatcher("book_cab.jsp");
+            dispatcher.forward(request, response);
         } else {
             request.setAttribute("error", "Booking failed! Please try again.");
         }
+        
+     
+
 
         request.getRequestDispatcher("book_cab.jsp").forward(request, response);
     }
